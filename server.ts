@@ -10,7 +10,7 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-const PORT = process.env.PORT || 8080;
+const PORT = Number(process.env.PORT) || 8080;
 const dbUrl = process.env.DATABASE_URL;
 
 if (!dbUrl) {
@@ -62,4 +62,6 @@ app.get("/health", (req: Request, res: Response) => {
 });
 
 // ✅ Start Server
-app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
+app.listen(PORT, '0.0.0.0', () => {
+    console.log(`Server is running on port ${PORT}`);
+});
