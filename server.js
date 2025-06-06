@@ -21,7 +21,7 @@ dotenv_1.default.config();
 const app = (0, express_1.default)();
 app.use(express_1.default.json());
 app.use((0, cors_1.default)());
-const PORT = process.env.PORT || 3000;
+const PORT = Number(process.env.PORT) || 8080;
 const dbUrl = process.env.DATABASE_URL;
 if (!dbUrl) {
     throw new Error("❌ DATABASE_URL is not set in environment variables");
@@ -65,4 +65,6 @@ app.get("/health", (req, res) => {
     res.json({ status: "ok", timestamp: new Date() });
 });
 // ✅ Start Server
-app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
+app.listen(PORT, '0.0.0.0', () => {
+    console.log(`Server is running on port ${PORT}`);
+});
